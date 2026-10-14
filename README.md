@@ -13,27 +13,27 @@ Evaluated using **Character Error Rate (CER)** — lower is better.
 ---
 
 ## 🏗️ Architecture
-
+```
 Input Image [1 × 32 × 128]
-↓
-CNN Block 1 — Conv(1→32) + BatchNorm + ReLU + MaxPool(2,2) → [32 × 16 × 64]
-↓
-CNN Block 2 — Conv(32→64) + BatchNorm + ReLU + MaxPool(2,2) → [64 × 8 × 32]
-↓
-CNN Block 3 — Conv(64→128) + BatchNorm + ReLU + MaxPool(2,1) → [128 × 4 × 32]
-↓
-Reshape → Sequence of 32 feature vectors [32 × 512]
-↓
-Linear Projection [32 × 256]
-↓
-Bidirectional LSTM — 2 layers, hidden=256 [32 × 512]
-↓
-Linear + Log Softmax [32 × vocab+1]
-↓
-CTC Loss (training) / Greedy Decoder (inference)
-↓
+        ↓
+CNN Block 1 — Conv(1→32) + BatchNorm + ReLU + MaxPool(2,2)   →  [32 × 16 × 64]
+        ↓
+CNN Block 2 — Conv(32→64) + BatchNorm + ReLU + MaxPool(2,2)  →  [64 × 8 × 32]
+        ↓
+CNN Block 3 — Conv(64→128) + BatchNorm + ReLU + MaxPool(2,1) →  [128 × 4 × 32]
+        ↓
+Reshape → Sequence of 32 feature vectors  [32 × 512]
+        ↓
+Linear Projection                          [32 × 256]
+        ↓
+Bidirectional LSTM — 2 layers, hidden=256  [32 × 512]
+        ↓
+Linear + Log Softmax                       [32 × vocab+1]
+        ↓
+CTC Loss (training)  /  Greedy Decoder (inference)
+        ↓
 Predicted Text
-
+```
 
 ---
 
@@ -63,6 +63,10 @@ The model was predicting **"9X" for every single image** — including training 
 
 **Fix:**
 Derived T = 32 by tracing the CNN architecture manually:
+
+
+Input width 128 → Pool(2,2) → 64 → Pool(2,2) → 32 → Pool(2,1) → 32
+
 
 Also added BatchNorm after every conv layer, gradient clipping, and reduced batch size from 64 to 32 to stabilize CTC training.
 
