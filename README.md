@@ -80,7 +80,7 @@ Place `train_images/`, `test_images/`, and `train-labels.csv` in the root folder
 
 ## 📁 Dataset
 
-Dataset is part of the **CIG AI/ML Problem Statement** competition and is not included in this repository.
+Dataset is part of the **CIG AI/ML Problem Statement** Open project and is not included in this repository.
 
 ---
 
