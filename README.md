@@ -64,3 +64,27 @@ The model was predicting **"9X" for every single image** — including training 
 **Fix:**
 Derived T = 32 by tracing the CNN architecture manually:
 
+Also added BatchNorm after every conv layer, gradient clipping, and reduced batch size from 64 to 32 to stabilize CTC training.
+
+---
+
+## 🚀 How to Run
+
+```bash
+pip install -r requirements.txt
+```
+
+Place `train_images/`, `test_images/`, and `train-labels.csv` in the root folder, then run all cells in `distorted_images_Recognition.ipynb`.
+
+---
+
+## 📁 Dataset
+
+Dataset is part of the **CIG AI/ML Problem Statement** competition and is not included in this repository.
+
+---
+
+## 🛠️ Tech Stack
+
+`Python` &nbsp; `PyTorch` &nbsp; `OpenCV` &nbsp; `NumPy` &nbsp; `Pandas` &nbsp; `scikit-learn`
+
